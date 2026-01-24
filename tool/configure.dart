@@ -1632,7 +1632,6 @@ abstract class Zcash {
   TransactionPriority getZcashTransactionPriorityAutomatic();
   TransactionPriority deserializeZcashTransactionPriority({required int raw});
   List<TransactionPriority> getTransactionPriorities();
-  List<ReceivePageOption> getZcashReceivePageOptions(Object wallet);
   ReceivePageOption getSelectedAddressType(Object wallet);
   dynamic getZcashAddressType(ReceivePageOption option);
   Future<void> setAddressType(Object wallet, dynamic option);
