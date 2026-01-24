@@ -502,7 +502,7 @@ AnimatedDropdown(dropdownText:"Advanced Settings",content: Column(children: [
         onItemSelected: (Currency cur) async {
           late final selectedCurrency;
           if (_fiatInputMode) {
-            selectedCurrency = widget.sendViewModel.fiatCurrency = (cur as FiatCurrency);
+            selectedCurrency = widget.sendViewModel.setFiatCurrency(cur as FiatCurrency);
           } else {
             selectedCurrency =
                 widget.sendViewModel.selectedCryptoCurrency = (cur as CryptoCurrency);
