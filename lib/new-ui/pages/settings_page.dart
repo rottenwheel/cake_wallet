@@ -31,7 +31,7 @@ class SettingsSectionData {
   static SettingsSectionData walletSettings =
       SettingsSectionData("Wallet Settings", "assets/new-ui/wallet_settings.svg", [
     SettingsListItem("assets/new-ui/settings_row_icons/nodes.svg", "Nodes", Routes.manageNodes),
-    // SettingsListItem("assets/new-ui/settings_row_icons/privacy.svg", "Privacy features", ""),
+    SettingsListItem("assets/new-ui/settings_row_icons/privacy.svg", "Privacy features", Routes.privacyPage),
     SettingsListItem("assets/new-ui/settings_row_icons/seed.svg", "Seed & keys", Routes.seed,
         routeArgs: true),
     SettingsListItem("assets/new-ui/settings_row_icons/other.svg", "Other", Routes.otherSettingsPage),
@@ -42,7 +42,7 @@ class SettingsSectionData {
     SettingsListItem("assets/new-ui/settings_row_icons/connections.svg", "Connections", Routes.connectionSync),
     // SettingsListItem("assets/new-ui/settings_row_icons/defaults.svg", "Defaults", ""),
     SettingsListItem("assets/new-ui/settings_row_icons/display.svg", "Display", Routes.displaySettingsPage),
-    SettingsListItem("assets/new-ui/settings_row_icons/security.svg", "Privacy & Security", Routes.privacyPage),
+    SettingsListItem("assets/new-ui/settings_row_icons/security.svg", "Privacy & Security", Routes.securityBackupPage),
     SettingsListItem("assets/new-ui/settings_row_icons/backup.svg", "Backup", Routes.backup),
   ]);
 
