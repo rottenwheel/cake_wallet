@@ -49,8 +49,8 @@ class SecurityBackupPage extends BasePage {
           children: [
             ModalHeader(
                 iconPath: "assets/new-ui/settings_row_icons/security.svg",
-                message: "Configure authentication and security settings and setup Cake 2FA.",
-                title: "Privacy & Security"),
+                message: S.of(context).privacy_and_security_desc,
+                title: S.of(context).privacy_and_security),
             Observer(
               builder: (_) => NewListSections(sections: {
                 "": [
