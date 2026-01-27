@@ -588,6 +588,11 @@ Future<void> defaultSettingsMigration(
             );
             ''');
           break;
+        case 58:
+          await db.execute('''
+ALTER TABLE WalletInfo ADD COLUMN receiveInfoboxDismissed DEFAULT FALSE;
+          ''');
+
         default:
           break;
       }
