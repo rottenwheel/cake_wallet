@@ -36,7 +36,9 @@ class _ListItemToggleWidgetState extends State<ListItemToggleWidget> {
     return ListItemStyleWrapper(
         isFirstInSection: widget.isFirstInSection,
         isLastInSection: widget.isLastInSection,
-        onTap: (){widget.onChanged(!widget.value);},
+        onTap: () {
+          widget.onChanged(!widget.value);
+        },
         builder: (context, textStyle, labelStyle) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

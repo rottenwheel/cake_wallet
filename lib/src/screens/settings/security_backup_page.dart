@@ -47,7 +47,10 @@ class SecurityBackupPage extends BasePage {
           spacing: 16,
           mainAxisSize: MainAxisSize.min,
           children: [
-            ModalHeader(iconPath: "assets/new-ui/settings_row_icons/security.svg", message: "Configure authentication and security settings and setup Cake 2FA.", title: "Privacy & Security"),
+            ModalHeader(
+                iconPath: "assets/new-ui/settings_row_icons/security.svg",
+                message: "Configure authentication and security settings and setup Cake 2FA.",
+                title: "Privacy & Security"),
             Observer(
               builder: (_) => NewListSections(sections: {
                 "": [
@@ -67,8 +70,8 @@ class SecurityBackupPage extends BasePage {
                                         isAuthenticatedSuccessfully);
                                   }
                                 } else {
-                                  _securitySettingsViewModel
-                                      .setAllowBiometricalAuthentication(isAuthenticatedSuccessfully);
+                                  _securitySettingsViewModel.setAllowBiometricalAuthentication(
+                                      isAuthenticatedSuccessfully);
                                 }
                               },
                               conditionToDetermineIfToUse2FA: _securitySettingsViewModel
@@ -100,7 +103,8 @@ class SecurityBackupPage extends BasePage {
                                 if (confirmation) {
                                   Navigator.of(context).pushNamed(
                                     Routes.setupDuressPin,
-                                    arguments: (PinCodeState<PinCodeWidget> pinCtx, String _) async {
+                                    arguments:
+                                        (PinCodeState<PinCodeWidget> pinCtx, String _) async {
                                       pinCtx.close();
                                       _securitySettingsViewModel.setEnableDuressPin(true);
                                     },
