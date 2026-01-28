@@ -38,6 +38,7 @@ class _PulsingDotState extends State<PulsingDot>
         duration: widget.fadeOutDuration,
       );
       await Future.delayed(widget.restDuration);
+      if(!mounted) return;
       controller.value = 1.0;
     }
   }
