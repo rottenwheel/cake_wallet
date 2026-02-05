@@ -26,6 +26,8 @@ import 'package:cw_core/wallet_info.dart';
 import 'package:cake_wallet/exchange/trade.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:collection/collection.dart';
+import 'package:cw_core/cake_hive.dart';
+import 'package:cw_core/erc20_token.dart';
 
 const newCakeWalletMoneroUri = 'xmr-node.cakewallet.com:18081';
 const cakeWalletBitcoinElectrumUri = 'electrum.cakewallet.com:50002';
@@ -548,7 +550,7 @@ Future<void> defaultSettingsMigration(
             currentNodePreferenceKey: PreferencesKey.currentBaseNodeIdKey,
           );
           break;
-         case 53:
+        case 53:
           await addWalletNodeList(nodes: nodes, type: WalletType.arbitrum);
           await _changeDefaultNode(
             nodes: nodes,
@@ -557,7 +559,7 @@ Future<void> defaultSettingsMigration(
             currentNodePreferenceKey: PreferencesKey.currentArbitrumNodeIdKey,
           );
           break;
-         case 54:
+        case 54:
           await _backupWowneroSeeds(havenSeedStore);
           break;
         case 55:
@@ -574,6 +576,8 @@ Future<void> defaultSettingsMigration(
               PreferencesKey.syncStatusDisplayMode, SyncStatusDisplayMode.blocksRemaining.name);
           break;
         case 57:
+          await _addXautTokenToExistingEthereumWallets();
+
           await addWalletNodeList(nodes: nodes, type: WalletType.bsc);
           await _changeDefaultNode(
             nodes: nodes,
@@ -581,6 +585,7 @@ Future<void> defaultSettingsMigration(
             type: WalletType.bsc,
             currentNodePreferenceKey: PreferencesKey.currentBscNodeIdKey,
           );
+          break;
         default:
           break;
       }
@@ -1017,7 +1022,8 @@ Future<void> updateNodeTypes({required Box<Node> nodes}) async {
 }
 
 Future<void> addAddressesForMoneroWallets() async {
-  final moneroWalletsInfo = (await WalletInfo.getAll()).where((info) => info.type == WalletType.monero);
+  final moneroWalletsInfo =
+      (await WalletInfo.getAll()).where((info) => info.type == WalletType.monero);
   moneroWalletsInfo.forEach((info) async {
     try {
       final walletPath = await pathForWallet(name: info.name, type: WalletType.monero);
@@ -1078,6 +1084,7 @@ Future<void> fixBtcDerivationPaths() async {
     }
   }
 }
+
 Future<void> updateBtcNanoWalletInfos() async {}
 // Future<void> updateBtcNanoWalletInfos() async {
 //   for (WalletInfo walletInfo in await WalletInfo.getAll()) {
@@ -1112,8 +1119,7 @@ Future<void> checkCurrentNodes(
   final currentDecredNodeId = sharedPreferences.getInt(PreferencesKey.currentDecredNodeIdKey);
   final currentBitcoinCashNodeId =
       sharedPreferences.getInt(PreferencesKey.currentBitcoinCashNodeIdKey);
-  final currentDogecoinNodeId =
-  sharedPreferences.getInt(PreferencesKey.currentDogecoinNodeIdKey);
+  final currentDogecoinNodeId = sharedPreferences.getInt(PreferencesKey.currentDogecoinNodeIdKey);
   final currentSolanaNodeId = sharedPreferences.getInt(PreferencesKey.currentSolanaNodeIdKey);
   final currentTronNodeId = sharedPreferences.getInt(PreferencesKey.currentTronNodeIdKey);
   final currentWowneroNodeId = sharedPreferences.getInt(PreferencesKey.currentWowneroNodeIdKey);
@@ -1165,8 +1171,11 @@ Future<void> checkCurrentNodes(
   }
 
   if (currentBitcoinElectrumServer == null) {
-    final cakeWalletElectrum =
-        Node(uri: cakeWalletBitcoinElectrumUri, type: WalletType.bitcoin, useSSL: false, isEnabledForAutoSwitching: true);
+    final cakeWalletElectrum = Node(
+        uri: cakeWalletBitcoinElectrumUri,
+        type: WalletType.bitcoin,
+        useSSL: false,
+        isEnabledForAutoSwitching: true);
     await nodeSource.add(cakeWalletElectrum);
     final cakeWalletElectrumTestnet =
         Node(uri: publicBitcoinTestnetElectrumUri, type: WalletType.bitcoin, useSSL: false);
@@ -1295,8 +1304,11 @@ Future<void> resetBitcoinElectrumServer(
       .firstWhereOrNull((node) => node.uriRaw.toString() == cakeWalletBitcoinElectrumUri);
 
   if (cakeWalletNode == null) {
-    cakeWalletNode =
-        Node(uri: cakeWalletBitcoinElectrumUri, type: WalletType.bitcoin, useSSL: false, isEnabledForAutoSwitching: true);
+    cakeWalletNode = Node(
+        uri: cakeWalletBitcoinElectrumUri,
+        type: WalletType.bitcoin,
+        useSSL: false,
+        isEnabledForAutoSwitching: true);
     // final cakeWalletElectrumTestnet =
     //     Node(uri: publicBitcoinTestnetElectrumUri, type: WalletType.bitcoin, useSSL: false);
     // await nodeSource.add(cakeWalletElectrumTestnet);
@@ -1416,3 +1428,39 @@ Future<void> migrateExistingNodesToUseAutoSwitching(
   }
 }
 
+Future<void> _addXautTokenToExistingEthereumWallets() async {
+  try {
+    final xautToken = Erc20Token(
+      name: "Tether Gold",
+      symbol: "XAUT",
+      contractAddress: "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+      decimal: 6,
+      enabled: false,
+      iconPath: "assets/images/xaut_icon.png",
+    );
+
+    final allWallets = await WalletInfo.getAll();
+
+    final ethereumWallets =
+        allWallets.where((wallet) => wallet.type == WalletType.ethereum).toList();
+
+    for (final walletInfo in ethereumWallets) {
+      final sanitizedName = walletInfo.name.replaceAll(' ', '_');
+      final boxName = '${sanitizedName}_${Erc20Token.ethereumBoxName}';
+
+      Box<Erc20Token> tokenBox;
+      if (CakeHive.isBoxOpen(boxName)) {
+        tokenBox = CakeHive.box<Erc20Token>(boxName);
+      } else {
+        tokenBox = await CakeHive.openBox<Erc20Token>(boxName);
+      }
+
+      final xautAddress = xautToken.contractAddress;
+      if (!tokenBox.containsKey(xautAddress)) {
+        await tokenBox.put(xautAddress, xautToken);
+      }
+    }
+  } catch (e) {
+    printV('Error in XAUT migration: $e');
+  }
+}
