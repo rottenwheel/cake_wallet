@@ -158,23 +158,126 @@ abstract class WalletAddressListViewModelBase extends WalletChangeListenerViewMo
       payjoinEndpoint.isEmpty;
 
   @computed
+  PaymentURI get uri {
+    if (isEVMCompatibleChain(wallet.type) && selectedChainId != null) {
+      switch (selectedChainId) {
+        case 1:
+          return EthereumURI(amount: amount, address: address.address);
+        case 137:
+          return PolygonURI(amount: amount, address: address.address);
+        case 8453:
+          return BaseURI(amount: amount, address: address.address);
+        case 42161:
+          return ArbitrumURI(amount: amount, address: address.address);
+        case 56:
+          return BSCURI(amount: amount, address: address.address);
+        default:
+          return EthereumURI(amount: amount, address: address.address);
+      }
+    }
+
+    switch (wallet.type) {
+      case WalletType.monero:
+        return MoneroURI(amount: amount, address: address.address);
+      case WalletType.haven:
+        return HavenURI(amount: amount, address: address.address);
+      case WalletType.bitcoin:
+        return BitcoinURI(amount: amount, address: address.address, pjUri: payjoinEndpoint);
+      case WalletType.litecoin:
+        return LitecoinURI(amount: amount, address: address.address);
+      case WalletType.ethereum:
+        return EthereumURI(amount: amount, address: address.address);
+      case WalletType.bitcoinCash:
+        return BitcoinCashURI(amount: amount, address: address.address);
+      case WalletType.banano:
+        return NanoURI(amount: amount, address: address.address);
+      case WalletType.nano:
+        return NanoURI(amount: amount, address: address.address);
+      case WalletType.polygon:
+        return PolygonURI(amount: amount, address: address.address);
+      case WalletType.solana:
+        return SolanaURI(amount: amount, address: address.address);
+      case WalletType.tron:
+        return TronURI(amount: amount, address: address.address);
+      case WalletType.wownero:
+        return WowneroURI(amount: amount, address: address.address);
+      case WalletType.zano:
+        return ZanoURI(amount: amount, address: address.address);
+      case WalletType.decred:
+        return DecredURI(amount: amount, address: address.address);
+      case WalletType.dogecoin:
+        return DogeURI(amount: amount, address: address.address);
+      case WalletType.base:
+        return BaseURI(amount: amount, address: address.address);
+      case WalletType.arbitrum:
+        return ArbitrumURI(amount: amount, address: address.address);
+      case WalletType.bsc:
+        return BSCURI(amount: amount, address: address.address);
+      case WalletType.zcash:
+        return ZcashURI(amount: amount, address: address.address);
+      case WalletType.none:
+        throw Exception('Unexpected type: ${type.toString()}');
+    }
+  }
   bool get isPayjoinAvailable => !isPayjoinUnavailable && !isSilentPayments && !isLightning;
 
   @observable
   late PaymentURI uri;
 
-  @action
-  Future<void> refreshUri() async {
-    if (tokenCurrency != null && isEVMCompatibleChain(wallet.type)) {
-      uri = ERC681URI(
-          chainId: wallet.chainId ?? 1,
-          address: wallet.walletAddresses.address,
-          amount: amount,
-          contractAddress: (tokenCurrency as Erc20Token).contractAddress);
-      return;
+    switch (wallet.type) {
+      case WalletType.monero:
+        return MoneroURI(amount: amount, address: address.address);
+      case WalletType.haven:
+        return HavenURI(amount: amount, address: address.address);
+      case WalletType.bitcoin:
+        return BitcoinURI(amount: amount, address: address.address, pjUri: payjoinEndpoint);
+      case WalletType.litecoin:
+        return LitecoinURI(amount: amount, address: address.address);
+      case WalletType.ethereum:
+        return EthereumURI(amount: amount, address: address.address);
+      case WalletType.bitcoinCash:
+        return BitcoinCashURI(amount: amount, address: address.address);
+      case WalletType.banano:
+        return NanoURI(amount: amount, address: address.address);
+      case WalletType.nano:
+        return NanoURI(amount: amount, address: address.address);
+      case WalletType.polygon:
+        return PolygonURI(amount: amount, address: address.address);
+      case WalletType.solana:
+        return SolanaURI(amount: amount, address: address.address);
+      case WalletType.tron:
+        return TronURI(amount: amount, address: address.address);
+      case WalletType.wownero:
+        return WowneroURI(amount: amount, address: address.address);
+      case WalletType.zano:
+        return ZanoURI(amount: amount, address: address.address);
+      case WalletType.decred:
+        return DecredURI(amount: amount, address: address.address);
+      case WalletType.dogecoin:
+        return DogeURI(amount: amount, address: address.address);
+      case WalletType.base:
+        return BaseURI(amount: amount, address: address.address);
+      case WalletType.arbitrum:
+        return ArbitrumURI(amount: amount, address: address.address);
+      case WalletType.zcash:
+        return ZcashURI(amount: amount, address: address.address);
+      case WalletType.none:
+        throw Exception('Unexpected type: ${type.toString()}');
     }
-    uri = await wallet.walletAddresses.getPaymentRequestUri(amount);
   }
+
+@action
+Future<void> refreshUri() async {
+  if (tokenCurrency != null && isEVMCompatibleChain(wallet.type)) {
+    uri = ERC681URI(
+        chainId: wallet.chainId ?? 1,
+        address: wallet.walletAddresses.address,
+        amount: amount,
+        contractAddress: (tokenCurrency as Erc20Token).contractAddress);
+    return;
+  }
+  uri = await wallet.walletAddresses.getPaymentRequestUri(amount);
+}
 
   @computed
   ObservableList<ListItem> get items => ObservableList<ListItem>()
@@ -445,7 +548,7 @@ abstract class WalletAddressListViewModelBase extends WalletChangeListenerViewMo
       switch (chainId) {
         case 1:
           return [
-            'assets/images/eth_icon.svg',
+            'assets/images/crypto/ethereum.webp',
             'assets/images/usdc_icon.svg',
             'assets/images/usdt_wallet_icon.svg',
             'assets/images/deuro_icon.svg',
@@ -453,7 +556,7 @@ abstract class WalletAddressListViewModelBase extends WalletChangeListenerViewMo
           ];
         case 137:
           return [
-            'assets/images/pol_icon.svg',
+            'assets/images/crypto/polygon.webp',
             'assets/images/eth_pol_icon.svg',
             'assets/images/usdc_icon.svg',
             'assets/images/usdt_wallet_icon.svg',
@@ -461,7 +564,7 @@ abstract class WalletAddressListViewModelBase extends WalletChangeListenerViewMo
           ];
         case 8453:
           return [
-            'assets/images/eth_icon.svg',
+            'assets/images/crypto/ethereum.webp',
             'assets/images/usdc_icon.svg',
             'assets/images/more_tokens.svg',
           ];
@@ -471,9 +574,16 @@ abstract class WalletAddressListViewModelBase extends WalletChangeListenerViewMo
             'assets/images/usdc_icon.svg',
             'assets/images/more_tokens.svg',
           ];
+        case 56:
+          return [
+            'assets/images/crypto/BNB.webp',
+            'assets/images/usdc_icon.svg',
+            'assets/images/usdt_wallet_icon.svg',
+            'assets/images/more_tokens.svg',
+          ];
         default:
           return [
-            'assets/images/eth_icon.svg',
+            'assets/images/crypto/ethereum.webp',
             'assets/images/usdc_icon.svg',
             'assets/images/usdt_wallet_icon.svg',
           ];
@@ -512,7 +622,7 @@ abstract class WalletAddressListViewModelBase extends WalletChangeListenerViewMo
   }
 
   @computed
-  String get monoImage => getChainMonoImage(type, selectedChainId: selectedChainId);
+  String get monoImage => getChainMonoImage(type);
 
   @computed
   bool get isBalanceAvailable => isElectrumWallet;

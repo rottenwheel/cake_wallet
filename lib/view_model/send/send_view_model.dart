@@ -239,6 +239,7 @@ abstract class SendViewModelBase extends WalletChangeListenerViewModel with Stor
       case WalletType.polygon:
       case WalletType.base:
       case WalletType.arbitrum:
+      case WalletType.bsc:
       case WalletType.tron:
       case WalletType.solana:
         return wallet.currency;
@@ -1044,6 +1045,7 @@ abstract class SendViewModelBase extends WalletChangeListenerViewModel with Stor
       case WalletType.polygon:
       case WalletType.base:
       case WalletType.arbitrum:
+      case WalletType.bsc:
         return evm!.createEVMTransactionCredentials(
           outputs,
           priority: priority,
@@ -1205,6 +1207,12 @@ abstract class SendViewModelBase extends WalletChangeListenerViewModel with Stor
       }
 
       if (errorMessage.contains('insufficient funds')) {
+        final feeCurrency = switch (walletType) {
+          WalletType.bsc => "BNB",
+          WalletType.polygon => "POL",
+          _ => "ETH",
+        };
+
         final parsedErrorMessageResult =
             EVMTransactionErrorFeesHandler.parseEthereumFeesErrorMessage(
           errorMessage,
@@ -1223,9 +1231,9 @@ abstract class SendViewModelBase extends WalletChangeListenerViewModel with Stor
 
         // Handle successfully parsed errors with specific values
         return '''${S.current.insufficient_funds_for_tx} \n\n'''
-            '''${S.current.balance}: ${parsedErrorMessageResult.balanceEth} ${walletType == WalletType.polygon ? "POL" : "ETH"} (${parsedErrorMessageResult.balanceUsd} ${fiatFromSettings.name})\n\n'''
-            '''${S.current.transaction_cost}: ${parsedErrorMessageResult.txCostEth} ${walletType == WalletType.polygon ? "POL" : "ETH"} (${parsedErrorMessageResult.txCostUsd} ${fiatFromSettings.name})\n\n'''
-            '''${S.current.overshot}: ${parsedErrorMessageResult.overshotEth} ${walletType == WalletType.polygon ? "POL" : "ETH"} (${parsedErrorMessageResult.overshotUsd} ${fiatFromSettings.name})''';
+            '''${S.current.balance}: ${parsedErrorMessageResult.balanceEth} ${feeCurrency} (${parsedErrorMessageResult.balanceUsd} ${fiatFromSettings.name})\n\n'''
+            '''${S.current.transaction_cost}: ${parsedErrorMessageResult.txCostEth} ${feeCurrency} (${parsedErrorMessageResult.txCostUsd} ${fiatFromSettings.name})\n\n'''
+            '''${S.current.overshot}: ${parsedErrorMessageResult.overshotEth} ${feeCurrency} (${parsedErrorMessageResult.overshotUsd} ${fiatFromSettings.name})''';
       }
 
       if (errorMessage.contains('max fee per gas less than block base fee')) {

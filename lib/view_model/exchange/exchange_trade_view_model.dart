@@ -371,6 +371,9 @@ abstract class ExchangeTradeViewModelBase with Store {
     bool _isSplToken() =>
         wallet.currency == CryptoCurrency.sol && tradeFrom?.tag == CryptoCurrency.sol.title;
 
+    bool _isBscToken() =>
+        wallet.currency == CryptoCurrency.bnb && tradeFrom?.tag == CryptoCurrency.bnb.tag;
+
     return tradeFrom == wallet.currency ||
         tradesStore.trade!.provider == ExchangeProviderDescription.xmrto ||
         _isEthToken() ||
@@ -378,7 +381,8 @@ abstract class ExchangeTradeViewModelBase with Store {
         _isSplToken() ||
         _isTronToken() ||
         _isBaseToken() ||
-        _isArbitrumToken();
+        _isArbitrumToken() ||
+        _isBscToken();
   }
 
   Future<void> registerSwapsXyzTransaction() async {
@@ -450,6 +454,18 @@ abstract class ExchangeTradeViewModelBase with Store {
       case WalletType.ethereum:
         return _createERC681URI(fromCurrency, inputAddress, amount);
       // TODO: Expand ERC681URI support to Polygon(modify decoding flow for QRs, pay anything, and deep link handling)
+      case WalletType.polygon:
+        return PolygonURI(amount: amount, address: inputAddress);
+      case WalletType.base:
+        return BaseURI(amount: amount, address: inputAddress);
+      case WalletType.arbitrum:
+        return ArbitrumURI(amount: amount, address: inputAddress);
+      case WalletType.bsc:
+        return BSCURI(amount: amount, address: inputAddress);
+      case WalletType.solana:
+        return SolanaURI(amount: amount, address: inputAddress);
+      case WalletType.tron:
+        return TronURI(amount: amount, address: inputAddress);
       case WalletType.monero:
         return MoneroURI(address: inputAddress, amount: amount);
       case WalletType.wownero:
@@ -495,5 +511,5 @@ abstract class ExchangeTradeViewModelBase with Store {
   }
 
   @computed
-  String get qrImage => getQrImage(wallet.type, selectedChainId: wallet.chainId);
+  String get qrImage => getQrImage(wallet.type);
 }

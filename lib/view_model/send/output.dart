@@ -134,6 +134,7 @@ abstract class OutputBase with Store {
           case WalletType.polygon:
           case WalletType.base:
           case WalletType.arbitrum:
+          case WalletType.bsc:
             _amount = evm!.formatterEVMParseAmount(_cryptoAmount);
             break;
           case WalletType.wownero:
@@ -229,10 +230,12 @@ abstract class OutputBase with Store {
         case WalletType.polygon:
         case WalletType.base:
         case WalletType.arbitrum:
+        case WalletType.bsc:
           final isNative = cryptoCurrencyHandler() == CryptoCurrency.eth ||
               cryptoCurrencyHandler() == CryptoCurrency.maticpoly ||
               cryptoCurrencyHandler() == CryptoCurrency.baseEth ||
-              cryptoCurrencyHandler() == CryptoCurrency.arbEth;
+              cryptoCurrencyHandler() == CryptoCurrency.arbEth ||
+              cryptoCurrencyHandler() == CryptoCurrency.bnb;
           String? fee = isNative
               ? evm!.getEVMNativeEstimatedFee(_wallet)
               : evm!.getEVMERC20EstimatedFee(_wallet);

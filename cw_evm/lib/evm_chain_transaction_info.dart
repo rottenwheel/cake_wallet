@@ -47,9 +47,17 @@ class EVMChainTransactionInfo extends TransactionInfo {
   /// Get fee currency symbol based on wallet type
   String get feeCurrency => EVMChainUtils.getFeeCurrency(chainId);
 
+  String get _displayTokenSymbol {
+    if (chainId == 56 && tokenSymbol.toUpperCase() == 'BSC-USD') return 'USDT';
+
+    return tokenSymbol;
+  }
+
   @override
-  String amountFormatted() =>
-      '${formatFixed(ethAmount, exponent, fractionalDigits: 10)} $tokenSymbol';
+  String amountFormatted() {
+    final amount = formatAmount((ethAmount / BigInt.from(10).pow(exponent)).toString());
+    return '${amount.substring(0, min(10, amount.length))} $_displayTokenSymbol';
+  }
 
   @override
   String fiatAmount() => _fiatAmount ?? '';
