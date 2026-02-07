@@ -977,6 +977,7 @@
   "show_keys": "Nuna iri/maɓallai",
   "show_market_place": "Nuna dan kasuwa",
   "show_seed": "Nuna iri",
+  "show_zcash_card": "Nuna katin kuɗi da ya ɓace zcash",
   "sign_all": "Shiga All",
   "sign_message": "Sa hannu",
   "sign_one": "Alamar daya",
@@ -1155,6 +1156,7 @@
   "transaction_sent_notice": "Idan allon bai ci gaba ba bayan minti 1, duba mai binciken toshewa da imel ɗin ku.",
   "transactions": "Ma'amaloli",
   "transactions_by_date": "Ma'amaloli ta kwanan wata",
+  "transparent_secret_key": "Maɓallin Sirrin Maɓalli",
   "transport_type": "Nau'in sufuri",
   "trocador_desc": "mai tara musanya ne wanda ke ba da damar musayar musanya da yawa don nemo farashin gasa.",
   "trocador_desc_kyc": "Tare da sunan mai bada, ana nuna ƙimar KYC. Trocador ne ya saita wannan kuma yana dogara ne akan nasu sharudda.",
@@ -1182,6 +1184,7 @@
   "understand": "na gane",
   "unhide_address": "Cire adireshin",
   "unknown_error": "Kuskuren da ba a sani ba",
+  "unified_view_key": "Maɓallin Duba Haɗin Kai",
   "unlock": "Buɗe",
   "unmatched_currencies": "Nau'in walat ɗin ku na yanzu bai dace da na lambar QR da aka bincika ba",
   "unrestricted_background_service": "Sabis na baya",
@@ -1300,5 +1303,11 @@
   "you_will_send": "Maida daga",
   "youCanGoBackToYourDapp": "Kuna iya komawa zuwa DPP ɗinku yanzu",
   "your": "Naku",
-  "yy": "YY"
+  "yy": "YY",
+  "zcash_card_description": "Idan ba ku ga cikakken ma'auni na Cake Wallet na iya ƙoƙarin share kuɗi daga adiresoshin canji na ciki waɗanda wasu wallet ɗin ke amfani da su.",
+  "zcash_card_dismiss": "Korar",
+  "zcash_card_enable_later": "Kuna iya kunna wannan katin koyaushe a cikin saitunan",
+  "zcash_card_missing_funds": "Bace kudi?",
+  "zcash_card_scan": "Duba",
+  "zcash_card_warning": "Kar a rufe app ɗin har sai an kammala aikin, idan kun yi haka wannan tsari zai buƙaci sake farawa daga karce."
 }

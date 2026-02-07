@@ -975,6 +975,7 @@
   "show_keys": "Zobrazit seed/klíče",
   "show_market_place": "Zobrazit trh",
   "show_seed": "Zobrazit seed",
+  "show_zcash_card": "Ukažte kartu s chybějícími prostředky zcash",
   "sign_all": "Podepište všechny",
   "sign_message": "Podepsat zprávu",
   "sign_one": "Podepsat jeden",
@@ -1153,6 +1154,7 @@
   "transaction_sent_notice": "Pokud proces nepokročí během 1 minuty, zkontrolujte block explorer a svůj e-mail.",
   "transactions": "Transakce",
   "transactions_by_date": "Transakce podle data",
+  "transparent_secret_key": "Transparentní tajný klíč",
   "transport_type": "Typ transportu",
   "trocador_desc": "je burzovní agregátor, který využívá více základních burz k nalezení konkurenceschopných sazeb.",
   "trocador_desc_kyc": "Vedle názvu poskytovatele se zobrazí hodnocení KYC. Toto nastavuje Trocador a je založeno na jejich vlastních kritériích.",
@@ -1180,6 +1182,7 @@
   "understand": "Rozumím",
   "unhide_address": "Odkrýt adresu",
   "unknown_error": "Neznámá chyba",
+  "unified_view_key": "Klíč jednotného zobrazení",
   "unlock": "Odemknout",
   "unmatched_currencies": "Měna vaší současné peněženky neodpovídá té v naskenovaném QR kódu",
   "unrestricted_background_service": "Neomezená služba na pozadí",
@@ -1297,5 +1300,11 @@
   "you_will_send": "Směnit z",
   "youCanGoBackToYourDapp": "Nyní se můžete vrátit do svého dappu",
   "your": "Vaše",
-  "yy": "YY"
+  "yy": "YY",
+  "zcash_card_description": "Pokud nevidíte svůj úplný zůstatek, Peněženka Cake se může pokusit vymést prostředky z interních změnových adres používaných některými peněženkami.",
+  "zcash_card_dismiss": "Propustit",
+  "zcash_card_enable_later": "Tuto kartu můžete kdykoli povolit později v nastavení",
+  "zcash_card_missing_funds": "Chybějící finanční prostředky?",
+  "zcash_card_scan": "Skenovat",
+  "zcash_card_warning": "Nezavírejte aplikaci, dokud se postup nedokončí, pokud tak učiníte, bude nutné tento proces restartovat od nuly."
 }

@@ -56,6 +56,9 @@ abstract class DisplaySettingsViewModelBase with Store {
 
   @computed
   bool get showAddressBookPopup => _settingsStore.showAddressBookPopupEnabled;
+  
+  @computed
+  bool get showZcashCard => _settingsStore.showZcashMissingFundsCard;
 
   @computed
   SyncStatusDisplayMode get syncStatusDisplayMode => _settingsStore.syncStatusDisplayMode;
@@ -115,6 +118,9 @@ abstract class DisplaySettingsViewModelBase with Store {
 
   @action
   void setDisplayAmountsInSatoshi(BitcoinAmountDisplayMode value) => _settingsStore.displayAmountsInSatoshi = value;
+
+  @action
+  void setShowZcashCard(bool value) => _settingsStore.showZcashMissingFundsCard = value;
 
   @action
   void setShouldDisplayBalance(bool value) {

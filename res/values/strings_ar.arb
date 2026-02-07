@@ -975,6 +975,7 @@
   "show_keys": "اظهار السييد / المفاتيح",
   "show_market_place": "إظهار السوق",
   "show_seed": "عرض السييد",
+  "show_zcash_card": "إظهار بطاقة الأموال المفقودة zcash",
   "sign_all": "قم بتوقيع الكل",
   "sign_message": "تسجيل رسالة",
   "sign_one": "وقع واحد",
@@ -1153,6 +1154,7 @@
   "transaction_sent_notice": "إذا لم تستمر الشاشة بعد دقيقة واحدة ، فتحقق من مستكشف البلوك والبريد الإلكتروني.",
   "transactions": "المعاملات",
   "transactions_by_date": "المعاملات حسب التاريخ",
+  "transparent_secret_key": "مفتاح سري شفاف",
   "transport_type": "نوع النقل",
   "trocador_desc": "هو مجمع صرف يعمل على الاستفادة من العديد من البورصات الأساسية للعثور على أسعار تنافسية.",
   "trocador_desc_kyc": "إلى جانب اسم الموفر، يظهر تصنيف KYC. تم تعيين هذا بواسطة Trocador وهو يعتمد على معاييرهم الخاصة.",
@@ -1180,6 +1182,7 @@
   "understand": "لقد فهمت",
   "unhide_address": "إظهار العنوان",
   "unknown_error": "خطأ غير معروف",
+  "unified_view_key": "مفتاح العرض الموحد",
   "unlock": "الغاء القفل",
   "unmatched_currencies": "عملة محفظتك الحالية لا تتطابق مع عملة QR الممسوحة ضوئيًا",
   "unrestricted_background_service": "خدمة خلفية غير مقيدة",
@@ -1297,5 +1300,11 @@
   "you_will_send": "تحويل من",
   "youCanGoBackToYourDapp": "يمكنك العودة إلى DAPP الخاص بك الآن",
   "your": "لك",
-  "yy": "YY"
+  "yy": "YY",
+  "zcash_card_description": "إذا كنت لا ترى رصيدك الكامل، فيمكن لـ Cake Wallet محاولة سحب الأموال من عناوين التغيير الداخلية التي تستخدمها بعض المحافظ.",
+  "zcash_card_dismiss": "رفض",
+  "zcash_card_enable_later": "يمكنك دائمًا تمكين هذه البطاقة لاحقًا في الإعدادات",
+  "zcash_card_missing_funds": "الأموال المفقودة؟",
+  "zcash_card_scan": "مسح",
+  "zcash_card_warning": "لا تغلق التطبيق حتى يكتمل الإجراء، إذا قمت بذلك، فستحتاج إلى إعادة تشغيل هذه العملية من البداية."
 }

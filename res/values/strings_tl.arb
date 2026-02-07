@@ -975,6 +975,7 @@
   "show_keys": "Ipakita ang mga seed/key",
   "show_market_place": "Ipakita ang Marketplace",
   "show_seed": "Ipakita ang seed",
+  "show_zcash_card": "Ipakita ang zcash na nawawalang funds card",
   "sign_all": "Mag -sign lahat",
   "sign_message": "Mag -sign Message",
   "sign_one": "Mag -sign ng isa",
@@ -1153,6 +1154,7 @@
   "transaction_sent_notice": "Kung hindi magpapatuloy ang screen pagkatapos ng 1 minuto, tingnan ang block explorer at ang iyong email.",
   "transactions": "Mga Transaksyon",
   "transactions_by_date": "Mga transaksyon ayon sa petsa",
+  "transparent_secret_key": "Transparent na Lihim na Susi",
   "transport_type": "Uri ng transportasyon",
   "trocador_desc": "ay isang exchange aggregator na gumagamit ng maramihang pinagbabatayan na palitan upang mahanap ang mga mapagkumpitensyang rate.",
   "trocador_desc_kyc": "Sa tabi ng pangalan ng provider, ipinapakita ang isang KYC Rating. Ito ay itinakda ng Trocador at ito ay batay sa kanilang sariling pamantayan.",
@@ -1180,6 +1182,7 @@
   "understand": "Naiitindihan ko",
   "unhide_address": "I-unhide ang address",
   "unknown_error": "Hindi kilalang error",
+  "unified_view_key": "Pinag-isang View Key",
   "unlock": "I-unlock",
   "unmatched_currencies": "Hindi tumutugma ang pera ng iyong kasalukuyang wallet sa na-scan na QR",
   "unrestricted_background_service": "Hindi pinigilan na serbisyo sa background",
@@ -1297,5 +1300,11 @@
   "you_will_send": "I-convert mula sa",
   "youCanGoBackToYourDapp": "Maaari kang bumalik sa iyong dapp ngayon",
   "your": "IYONG",
-  "yy": "YY"
+  "yy": "YY",
+  "zcash_card_description": "Kung hindi mo makita ang iyong buong balanse, maaaring subukan ng Cake Wallet na walisin ang mga pondo mula sa mga panloob na pagbabago sa mga address na ginagamit ng ilang wallet.",
+  "zcash_card_dismiss": "I-dismiss",
+  "zcash_card_enable_later": "Maaari mong paganahin ang card na ito anumang oras sa ibang pagkakataon sa mga setting",
+  "zcash_card_missing_funds": "Kulang ng pondo?",
+  "zcash_card_scan": "I-scan",
+  "zcash_card_warning": "Huwag isara ang app hanggang sa makumpleto ang pamamaraan, kung gagawin mo ito, kakailanganing i-restart ang prosesong ito mula sa simula."
 }

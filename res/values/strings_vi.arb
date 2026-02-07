@@ -972,6 +972,7 @@
   "show_keys": "Hiển thị hạt giống/khóa",
   "show_market_place": "Hiển thị Thị trường",
   "show_seed": "Hiển thị hạt giống",
+  "show_zcash_card": "Hiển thị thẻ tiền còn thiếu của zcash",
   "sign_all": "Ký tất cả",
   "sign_message": "Ký tin nhắn",
   "sign_one": "Ký một",
@@ -1150,6 +1151,7 @@
   "transaction_sent_notice": "Nếu màn hình không tiếp tục sau 1 phút, hãy kiểm tra trình khám phá khối và email của bạn.",
   "transactions": "Giao dịch",
   "transactions_by_date": "Giao dịch theo ngày",
+  "transparent_secret_key": "Khóa bí mật trong suốt",
   "transport_type": "Loại vận chuyển",
   "trocador_desc": "là một công cụ tổng hợp trao đổi tận dụng nhiều sàn giao dịch cơ bản để tìm ra mức giá cạnh tranh.",
   "trocador_desc_kyc": "Bên cạnh tên nhà cung cấp, Xếp hạng KYC được hiển thị. Điều này do Trocador đặt ra và dựa trên tiêu chí riêng của họ.",
@@ -1177,6 +1179,7 @@
   "understand": "Tôi hiểu",
   "unhide_address": "Hiện địa chỉ",
   "unknown_error": "Lỗi không xác định",
+  "unified_view_key": "Khóa xem hợp nhất",
   "unlock": "Mở khóa",
   "unmatched_currencies": "Tiền tệ của ví hiện tại của bạn không khớp với QR đã quét",
   "unrestricted_background_service": "Dịch vụ nền không giới hạn",
@@ -1294,5 +1297,11 @@
   "you_will_send": "Chuyển đổi từ",
   "youCanGoBackToYourDapp": "Bạn có thể quay lại DAPP của mình ngay bây giờ",
   "your": "Của bạn",
-  "yy": "YY"
+  "yy": "YY",
+  "zcash_card_description": "Nếu bạn không thấy số dư đầy đủ của mình, Cake Wallet có thể cố gắng quét tiền từ các địa chỉ thay đổi nội bộ được một số ví sử dụng.",
+  "zcash_card_dismiss": "Miễn nhiệm",
+  "zcash_card_enable_later": "Bạn luôn có thể bật thẻ này sau trong cài đặt",
+  "zcash_card_missing_funds": "Thiếu tiền?",
+  "zcash_card_scan": "Quét",
+  "zcash_card_warning": "Không đóng ứng dụng cho đến khi quy trình hoàn tất, nếu bạn làm như vậy thì quy trình này sẽ cần phải khởi động lại từ đầu."
 }

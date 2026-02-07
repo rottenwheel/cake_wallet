@@ -976,6 +976,7 @@
   "show_keys": "Mostrar semilla/claves",
   "show_market_place": "Mostrar Cake Features",
   "show_seed": "Mostrar semilla",
+  "show_zcash_card": "Mostrar tarjeta de fondos faltantes de zcash",
   "sign_all": "Firmar Todo",
   "sign_message": "Firmar mensaje",
   "sign_one": "Firmar 1",
@@ -1154,6 +1155,7 @@
   "transaction_sent_notice": "Si la pantalla no avanza después de 1 minuto, verifica un explorador de bloques y tu correo electrónico.",
   "transactions": "Transacciones",
   "transactions_by_date": "Transacciones por fecha",
+  "transparent_secret_key": "Clave secreta transparente",
   "transport_type": "Tipo de Transporte",
   "trocador_desc": "es un agregador de divisas que aprovecha múltiples intercambios subyacentes para encontrar tasas competitivas.",
   "trocador_desc_kyc": "Junto al nombre del proveedor, se muestra una calificación KYC. Esto lo establece Trocador y se basa en sus propios criterios.",
@@ -1181,6 +1183,7 @@
   "understand": "Entiendo",
   "unhide_address": "Mostrar dirección",
   "unknown_error": "Error desconocido",
+  "unified_view_key": "Clave de vista unificada",
   "unlock": "Desbloquear",
   "unmatched_currencies": "La moneda de tu billetera actual no coincide con la del código QR escaneado",
   "unrestricted_background_service": "Servicio en segundo plano sin restricciones",
@@ -1299,5 +1302,11 @@
   "you_will_send": "Convertir desde",
   "youCanGoBackToYourDapp": "Ahora puedes volver a tu dApp",
   "your": "Tu",
-  "yy": "YY"
+  "yy": "YY",
+  "zcash_card_description": "Si no ve su saldo completo, Cake Wallet puede intentar barrer fondos de las direcciones de cambio internas utilizadas por algunas billeteras.",
+  "zcash_card_dismiss": "Despedir",
+  "zcash_card_enable_later": "Siempre puedes habilitar esta tarjeta más tarde en la configuración",
+  "zcash_card_missing_funds": "¿Faltan fondos?",
+  "zcash_card_scan": "Escanear",
+  "zcash_card_warning": "No cierre la aplicación hasta que se complete el procedimiento; si lo hace, este proceso deberá reiniciarse desde cero."
 }
