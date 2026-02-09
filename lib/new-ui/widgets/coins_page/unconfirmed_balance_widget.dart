@@ -19,7 +19,8 @@ class UnconfirmedBalanceWidget extends StatelessWidget {
     final currency = dashboardViewModel.wallet.currency;
     return Observer(builder: (_) {
       final balance = dashboardViewModel.balanceViewModel.additionalBalance(currency);
-      final show = double.parse(balance) != 0.0;
+      final show = dashboardViewModel.balanceViewModel
+          .hasAdditionalBalance(dashboardViewModel.wallet.currency);
 
       return AnimatedSize(
           duration: const Duration(milliseconds: 300),

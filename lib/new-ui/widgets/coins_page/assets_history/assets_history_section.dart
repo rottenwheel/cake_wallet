@@ -9,6 +9,13 @@ import 'package:mobx/mobx.dart';
 import 'assets_section.dart';
 import 'history_section.dart';
 
+class AssetsHistorySectionTab {
+  final String title;
+  final Widget content;
+
+  AssetsHistorySectionTab(this.title, this.content);
+}
+
 class AssetsHistorySection extends StatefulWidget {
   AssetsHistorySection({super.key, required this.dashboardViewModel, required this.nftViewModel});
 
@@ -20,8 +27,7 @@ class AssetsHistorySection extends StatefulWidget {
 }
 
 class _AssetsHistorySectionState extends State<AssetsHistorySection> {
-  List<Widget> tabs = [];
-  List<String> tabNames = [];
+  List<AssetsHistorySectionTab> tabs = [];
   int _selectedTab = 0;
 
   void reloadTabs() {
@@ -29,24 +35,15 @@ class _AssetsHistorySectionState extends State<AssetsHistorySection> {
     tabs = [
       if(widget.dashboardViewModel
           .balanceViewModel.isHomeScreenSettingsEnabled)
-        AssetsSection(
+        AssetsHistorySectionTab(S.current.assets,AssetsSection(
           dashboardViewModel: widget.dashboardViewModel,
-        ),
-      HistorySection(
+        )),
+      AssetsHistorySectionTab(S.current.history,HistorySection(
         dashboardViewModel: widget.dashboardViewModel,
-      ),
+      )),
 
-      if(isNFTACtivatedChain(widget.dashboardViewModel.wallet.type))
-        NFTListingPage(nftViewModel: widget.nftViewModel)
-    ];
-
-    tabNames = [
-      if(widget.dashboardViewModel
-          .balanceViewModel.isHomeScreenSettingsEnabled)
-        S.current.assets,
-      S.current.history,
-      if(isNFTACtivatedChain(widget.dashboardViewModel.wallet.type))
-        S.current.nfts
+      if(isNFTACtivatedChain(widget.dashboardViewModel.wallet.type, chainId: widget.dashboardViewModel.wallet.chainId))
+        AssetsHistorySectionTab(S.current.nfts,NFTListingPage(nftViewModel: widget.nftViewModel))
     ];
     if(oldTabLength!=tabs.length) {
       setState(() {
@@ -72,7 +69,7 @@ class _AssetsHistorySectionState extends State<AssetsHistorySection> {
         if(tabs.length>1)
         AssetsTopBar(
           dashboardViewModel: widget.dashboardViewModel,
-          tabs: tabNames,
+          tabs: tabs.map((item) => item.title).toList(),
           onTabChange: (index) {
             setState(() {
               _selectedTab = index;
@@ -80,7 +77,7 @@ class _AssetsHistorySectionState extends State<AssetsHistorySection> {
           },
           selectedTab: _selectedTab,
         ),
-        tabs[_selectedTab],
+        tabs[_selectedTab].content,
       ],
     );
   }
