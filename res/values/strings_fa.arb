@@ -552,6 +552,7 @@
   "litecoin_mweb_always_scan": "تنظیم اسکن همیشگی MWEB",
   "litecoin_mweb_description": "MWEB پروتکل جدیدی است که تراکنش‌های سریع‌تر، ارزان‌تر و خصوصی‌تری را برای لایت‌کوین به ارمغان می‌آورد",
   "litecoin_mweb_dismiss": "رد کردن",
+  "litecoin_mweb_display": "نمایش MWEB در صفحه اصلی",
   "litecoin_mweb_display_card": "نمایش کارت MWEB",
   "litecoin_mweb_enable": "فعال‌سازی MWEB",
   "litecoin_mweb_enable_later": "می‌توانید بعداً MWEB را دوباره در تنظیمات نمایش فعال کنید.",

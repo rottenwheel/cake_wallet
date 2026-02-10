@@ -554,6 +554,7 @@
   "litecoin_mweb_always_scan": "MWEB 항상 스캔 설정",
   "litecoin_mweb_description": "MWEB는 라이트코인에 더 빠르고, 저렴하며, 더 비공개적인 트랜잭션을 제공하는 새로운 프로토콜입니다.",
   "litecoin_mweb_dismiss": "닫기",
+  "litecoin_mweb_display": "홈 화면에 MWEB 표시",
   "litecoin_mweb_display_card": "MWEB 카드 표시",
   "litecoin_mweb_enable": "MWEB 활성화",
   "litecoin_mweb_enable_later": "표시 설정에서 MWEB를 다시 활성화하도록 선택할 수 있습니다.",

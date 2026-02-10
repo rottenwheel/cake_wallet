@@ -554,6 +554,7 @@
   "litecoin_mweb_always_scan": "Սահմանեք Mweb Միշտ սկանավորում",
   "litecoin_mweb_description": "Mweb- ը նոր արձանագրություն է, որը բերում է ավելի արագ, ավելի էժան եւ ավելի մասնավոր գործարքներ դեպի LITECOIN",
   "litecoin_mweb_dismiss": "Հեռացնել",
+  "litecoin_mweb_display": "Ցույց տալ MWEB-ը հիմնական էկրանին",
   "litecoin_mweb_display_card": "Show ույց տալ Mweb քարտը",
   "litecoin_mweb_enable": "Միացնել Mweb- ը",
   "litecoin_mweb_enable_later": "Կարող եք ընտրել Mweb- ը կրկին միացնել ցուցադրման պարամետրերը:",

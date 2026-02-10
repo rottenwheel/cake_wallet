@@ -554,6 +554,7 @@
   "litecoin_mweb_always_scan": "MWEB'i her zaman taramayı ayarlayın",
   "litecoin_mweb_description": "MWEB, Litecoin'e daha hızlı, daha ucuz ve daha fazla özel işlem getiren yeni bir protokoldür",
   "litecoin_mweb_dismiss": "Azletmek",
+  "litecoin_mweb_display": "MWEB'i ana ekranda göster",
   "litecoin_mweb_display_card": "MWEB kartını göster",
   "litecoin_mweb_enable": "MWEB'i etkinleştir",
   "litecoin_mweb_enable_later": "Ekran ayarlarının altında MWEB'yi tekrar etkinleştirmeyi seçebilirsiniz.",

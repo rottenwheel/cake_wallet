@@ -554,6 +554,7 @@
   "litecoin_mweb_always_scan": "Itakda ang MWeb na laging nag -scan",
   "litecoin_mweb_description": "Ang MWeb ay isang bagong protocol na nagdadala ng mas mabilis, mas mura, at mas maraming pribadong mga transaksyon sa Litecoin",
   "litecoin_mweb_dismiss": "Tanggalin",
+  "litecoin_mweb_display": "Ipakita ang MWEB sa home screen",
   "litecoin_mweb_display_card": "Ipakita ang MWEB Card",
   "litecoin_mweb_enable": "Paganahin ang MWeb",
   "litecoin_mweb_enable_later": "Maaari kang pumili upang paganahin muli ang MWeb sa ilalim ng mga setting ng pagpapakita.",

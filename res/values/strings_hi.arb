@@ -554,6 +554,7 @@
   "litecoin_mweb_always_scan": "MWEB हमेशा स्कैनिंग सेट करें",
   "litecoin_mweb_description": "MWEB एक नया प्रोटोकॉल है जो लिटकोइन के लिए तेजी से, सस्ता और अधिक निजी लेनदेन लाता है",
   "litecoin_mweb_dismiss": "नकार देना",
+  "litecoin_mweb_display": "होम स्क्रीन पर MWEB दिखाएँ",
   "litecoin_mweb_display_card": "MWEB कार्ड दिखाएं",
   "litecoin_mweb_enable": "MWEB सक्षम करें",
   "litecoin_mweb_enable_later": "आप प्रदर्शन सेटिंग्स के तहत फिर से MWEB को सक्षम करने के लिए चुन सकते हैं।",

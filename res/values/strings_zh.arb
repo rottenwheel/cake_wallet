@@ -554,6 +554,7 @@
   "litecoin_mweb_always_scan": "设置MWEB总是扫描",
   "litecoin_mweb_description": "MWEB是一项新协议，它将更快，更便宜和更多的私人交易带给Litecoin",
   "litecoin_mweb_dismiss": "忽略",
+  "litecoin_mweb_display": "在主屏幕上显示 MWEB",
   "litecoin_mweb_display_card": "显示MWEB卡",
   "litecoin_mweb_enable": "启用MWEB",
   "litecoin_mweb_enable_later": "您可以选择在显示设置下再次启用MWEB。",
