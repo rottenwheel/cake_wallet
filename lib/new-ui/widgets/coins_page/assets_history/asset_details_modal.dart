@@ -71,7 +71,21 @@ class AssetDetailsModal extends StatelessWidget {
                           if (chainIconPath.isNotEmpty)
                             Align(
                                 alignment: Alignment.bottomRight,
-                                child: SvgPicture.asset(chainIconPath, width: 22, height: 22))
+                                child: Container(
+                                    decoration: ShapeDecoration(
+                                        shape: RoundedSuperellipseBorder(
+                                            borderRadius: BorderRadius.circular(8),side: BorderSide(color: Colors.black)),
+                                        color: Colors.white),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: SvgPicture.asset(
+                                        chainIconPath,
+                                        width: 18,
+                                        height: 18,
+                                        colorFilter:
+                                        ColorFilter.mode(Colors.black, BlendMode.srcIn),
+                                      ),
+                                    )))
                         ],
                       ),
                     ),
