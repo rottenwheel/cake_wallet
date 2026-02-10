@@ -149,7 +149,7 @@ class CryptoCurrency extends EnumerableItem<int> with Serializable<int> implemen
   static const xmr = CryptoCurrency(title: 'XMR', fullName: 'Monero', raw: 0, name: 'xmr', iconPath: 'assets/images/crypto/monero.webp', decimals: 12,flatIconPath: "assets/new-ui/balance_card_icons/monero.svg");
   static const ada = CryptoCurrency(title: 'ADA', fullName: 'Cardano', raw: 1, name: 'ada', iconPath: 'assets/images/ada_icon.png', decimals: 6);
   static const bch = CryptoCurrency(title: 'BCH', fullName: 'Bitcoin Cash', raw: 2, name: 'bch', iconPath: 'assets/images/crypto/bitcoin-cash.webp', decimals: 8,flatIconPath: "assets/new-ui/balance_card_icons/bitcoin_cash.svg");
-  static const bnb = CryptoCurrency(title: 'BNB', tag: 'BSC', fullName: 'Binance Coin', raw: 3, name: 'bnb', iconPath: 'assets/images/crypto/BNB.webp', decimals: 8);
+  static const bnb = CryptoCurrency(title: 'BNB', tag: 'BSC', fullName: 'Binance Coin', raw: 3, name: 'bnb', iconPath: 'assets/images/crypto/BNB.webp', decimals: 8, flatIconPath: "assets/new-ui/balance_card_icons/bnb.svg");
   static const btc = CryptoCurrency(title: 'BTC', fullName: 'Bitcoin', raw: 4, name: 'btc', iconPath: 'assets/images/crypto/bitcoin.webp', decimals: 8,flatIconPath: "assets/new-ui/balance_card_icons/bitcoin.svg");
   static const dai = CryptoCurrency(title: 'DAI', tag: 'ETH', fullName: 'Dai', raw: 5, name: 'dai', iconPath: 'assets/images/crypto/dai.webp', decimals: 18);
   static const dash = CryptoCurrency(title: 'DASH', fullName: 'Dash', raw: 6, name: 'dash', iconPath: 'assets/images/dash_icon.png', decimals: 8);
@@ -211,7 +211,7 @@ class CryptoCurrency extends EnumerableItem<int> with Serializable<int> implemen
   static const scrt = CryptoCurrency(title: 'SCRT', fullName: 'Secret Network', raw: 59, name: 'scrt', iconPath: 'assets/images/scrt_icon.png', decimals: 6);
   static const uni = CryptoCurrency(title: 'UNI', tag: 'ETH', fullName: 'Uniswap', raw: 60, name: 'uni', iconPath: 'assets/images/uni_icon.png', decimals: 18);
   static const stx = CryptoCurrency(title: 'STX', fullName: 'Stacks', raw: 61, name: 'stx', iconPath: 'assets/images/stx_icon.png', decimals: 8);
-  static const btcln = CryptoCurrency(title: 'BTC', tag: 'LN', fullName: 'Bitcoin Lightning Network', raw: 62, name: 'btcln', iconPath: 'assets/images/crypto/bitcoin.webp', decimals: 8);
+  static const btcln = CryptoCurrency(title: 'BTC', tag: 'LN', fullName: 'Bitcoin Lightning Network', raw: 62, name: 'btcln', iconPath: 'assets/images/crypto/lightning.webp', decimals: 8);
   static const shib = CryptoCurrency(title: 'SHIB', tag: 'ETH', fullName: 'Shiba Inu', raw: 63, name: 'shib', iconPath: 'assets/images/shib_icon.png', decimals: 18);
   static const aave = CryptoCurrency(title: 'AAVE', tag: 'ETH', fullName: 'Aave', raw: 64, name: 'aave', iconPath: 'assets/images/aave_icon.png', decimals: 18);
   static const arb = CryptoCurrency(title: 'ARB', fullName: 'Arbitrum', raw: 65, name: 'arb', iconPath: 'assets/images/crypto/arbitrum.webp', decimals: 18, flatIconPath: "assets/new-ui/balance_card_icons/arbitrum.svg");
