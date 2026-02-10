@@ -244,10 +244,14 @@ class BalanceCard extends StatelessWidget {
   }
 
   String formatAmount(String amount) {
-    if(displaySat) {
-      return NumberFormat("#,###").format(int.parse(amount));
+    try {
+      if (displaySat) {
+        return NumberFormat("#,###").format(int.parse(amount));
+      }
+      return double.parse(amount).toStringAsPrecision(8).replaceFirst(RegExp(r"\.?0+$"), "");
+    } catch(e) {
+      return amount;
     }
-    return double.parse(amount).toStringAsPrecision(8).replaceFirst(RegExp(r"\.?0+$"), "");;
   }
 
   Widget getBalanceCardActionButton(BalanceCardAction action) => GestureDetector(
