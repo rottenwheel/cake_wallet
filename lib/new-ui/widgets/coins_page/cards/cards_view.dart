@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:cake_wallet/bitcoin/bitcoin.dart';
 import 'package:cake_wallet/di.dart';
-import 'package:cake_wallet/entities/bitcoin_amount_display_mode.dart';
 import 'package:cake_wallet/generated/i18n.dart';
 import 'package:cake_wallet/new-ui/modal_navigator.dart';
 import 'package:cake_wallet/new-ui/pages/send_page.dart';
@@ -108,10 +107,10 @@ class _CardsViewState extends State<CardsView> {
 
             // The second balance should always be the lightning balance
             final walletBalanceRecord = widget.dashboardViewModel.balanceViewModel.formattedBalances
-                .elementAt(widget.lightningMode ? 1 : 0);
+                .elementAtOrNull(widget.lightningMode ? 1 : 0);
 
-            final walletBalance = walletBalanceRecord.availableBalance;
-            final walletFiatBalance = walletBalanceRecord.fiatAvailableBalance;
+            final walletBalance = walletBalanceRecord?.availableBalance ?? "0";
+            final walletFiatBalance = walletBalanceRecord?.fiatAvailableBalance ?? "0.00";
 
             // the card designs is empty if widget gets built before it loads.
             // should get populated before user sees anything
@@ -159,7 +158,7 @@ class _CardsViewState extends State<CardsView> {
               accountName: accountName,
               accountBalance: accountBalance,
               designSwitchDuration: Duration(milliseconds: 150),
-              assetName: walletBalanceRecord.formattedAssetTitle,
+              assetName: walletBalanceRecord?.formattedAssetTitle ?? "",
               balance: walletBalance,
               fiatBalance: walletFiatBalance,
               selected: _selectedIndex == visualIndex,
