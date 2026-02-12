@@ -138,7 +138,7 @@ class AssetTile extends StatelessWidget {
                           ],
                         ),
                         Text(
-                           "${showSecondary ?balance.secondAvailableBalance: balance.availableBalance} ${balance.asset.title}",
+                           "${showSecondary ?balance.secondAvailableBalance: balance.availableBalance} ${balance.formattedAssetTitle}",
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),

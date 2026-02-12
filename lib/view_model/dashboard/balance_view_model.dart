@@ -6,6 +6,7 @@ import 'package:cake_wallet/entities/sort_balance_types.dart';
 import 'package:cake_wallet/generated/i18n.dart';
 import 'package:cake_wallet/reactions/wallet_connect.dart';
 import 'package:cake_wallet/evm/evm.dart';
+import 'package:cw_core/crypto_amount_format.dart';
 import 'package:cw_core/transaction_history.dart';
 import 'package:cw_core/wallet_base.dart';
 import 'package:cake_wallet/store/app_store.dart';
@@ -213,12 +214,7 @@ abstract class BalanceViewModelBase with Store {
   @computed
   Map<CryptoCurrency, BalanceRecord> get balances {
     return wallet.balance.map((key, value) {
-      var secondAsset = key;
-      if (key == CryptoCurrency.btc) {
-        secondAsset = CryptoCurrency.btcln;
-      } else if (key == CryptoCurrency.ltc) {
-        secondAsset = CryptoCurrency.ltcmweb;
-      }
+      var secondAsset = key == CryptoCurrency.ltc ? CryptoCurrency.ltcmweb : key;
 
       if (displayMode == BalanceDisplayMode.hiddenBalance) {
         final fiatCurrency = settingsStore.fiatCurrency;
@@ -242,7 +238,9 @@ abstract class BalanceViewModelBase with Store {
                 formattedAssetTitle: _formatterAsset(key)));
       }
       final fiatCurrency = settingsStore.fiatCurrency;
-      final price = key.isPotentialScam ? 0.0 : fiatConversionStore.prices[key] ?? 0;
+      final price = key.isPotentialScam
+          ? 0.0
+          : fiatConversionStore.prices[key == CryptoCurrency.btcln ? CryptoCurrency.btc : key] ?? 0;
 
       // if (price == null) {
       //   throw Exception('Price is null for: $key');
@@ -250,23 +248,23 @@ abstract class BalanceViewModelBase with Store {
 
       final availableFiatBalance = isFiatDisabled
           ? ''
-          : '$fiatCurrency ${_getFiatBalance(price: price, cryptoAmount: key.formatAmount(BigInt.from(value.available)))}';
+          : '$fiatCurrency ${_getFiatBalance(price: price, cryptoAmount: key.formatAmount(BigInt.from(value.available))).withLocalSeperator()}';
 
       final additionalFiatBalance = isFiatDisabled
           ? ''
-          : '$fiatCurrency ${_getFiatBalance(price: price, cryptoAmount: key.formatAmount(BigInt.from(value.additional)))}';
+          : '$fiatCurrency ${_getFiatBalance(price: price, cryptoAmount: key.formatAmount(BigInt.from(value.additional))).withLocalSeperator()}';
 
       final frozenFiatBalance = isFiatDisabled
           ? ''
-          : '$fiatCurrency ${_getFiatBalance(price: price, cryptoAmount: value.frozen != null ? key.formatAmount(BigInt.from(value.frozen!)) : null)}';
+          : '$fiatCurrency ${_getFiatBalance(price: price, cryptoAmount: value.frozen != null ? key.formatAmount(BigInt.from(value.frozen!)) : null).withLocalSeperator()}';
 
       final secondAvailableFiatBalance = isFiatDisabled
           ? ''
-          : '$fiatCurrency ${_getFiatBalance(price: price, cryptoAmount: value.secondAvailable != null ? key.formatAmount(BigInt.from(value.secondAvailable!)) : null)}';
+          : '$fiatCurrency ${_getFiatBalance(price: price, cryptoAmount: value.secondAvailable != null ? key.formatAmount(BigInt.from(value.secondAvailable!)) : null).withLocalSeperator()}';
 
       final secondAdditionalFiatBalance = isFiatDisabled
           ? ''
-          : '$fiatCurrency ${_getFiatBalance(price: price, cryptoAmount: value.secondAdditional != null ? key.formatAmount(BigInt.from(value.secondAdditional!)) : null)}';
+          : '$fiatCurrency ${_getFiatBalance(price: price, cryptoAmount: value.secondAdditional != null ? key.formatAmount(BigInt.from(value.secondAdditional!)) : null).withLocalSeperator()}';
 
       return MapEntry(
         key,
@@ -333,7 +331,9 @@ abstract class BalanceViewModelBase with Store {
   String _getFormattedCryptoAmount(CryptoCurrency cryptoCurrency, int? amount) {
     if (amount == null) return "";
 
-    return appStore.amountParsingProxy.getDisplayCryptoString(amount, cryptoCurrency);
+    return appStore.amountParsingProxy
+        .getDisplayCryptoString(amount, cryptoCurrency)
+        .withMaxDecimals(8).withLocalSeperator();
   }
 
   @computed

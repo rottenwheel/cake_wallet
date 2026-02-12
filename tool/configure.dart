@@ -977,6 +977,7 @@ abstract class Solana {
   List<int>? getValidationLength(CryptoCurrency type);
   double? getEstimateFees(WalletBase wallet);
   List<String> getDefaultTokenContractAddresses();
+  List<String> getDefaultTokenSymbols();
   bool isTokenAlreadyAdded(WalletBase wallet, String contractAddress);
   
   // Jupiter swap transaction handling
@@ -1102,6 +1103,7 @@ abstract class Tron {
 
   void updateTronGridUsageState(WalletBase wallet, bool isEnabled);
   List<String> getDefaultTokenContractAddresses();
+  List<String> getDefaultTokenSymbols();
   bool isTokenAlreadyAdded(WalletBase wallet, String contractAddress);
 }
   """;
@@ -1497,6 +1499,7 @@ abstract class EVM {
   
   // Utility methods
   List<String> getDefaultTokenContractAddresses(WalletBase wallet);
+  List<String> getDefaultTokenSymbols(WalletBase wallet);
   bool isTokenAlreadyAdded(WalletBase wallet, String contractAddress);
   String? getEVMNativeEstimatedFee(WalletBase wallet);
   String? getEVMERC20EstimatedFee(WalletBase wallet);
