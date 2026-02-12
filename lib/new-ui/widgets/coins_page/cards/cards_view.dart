@@ -106,16 +106,12 @@ class _CardsViewState extends State<CardsView> {
             }
             final account = widget.accountListViewModel?.accounts[realIndex];
 
-            final walletBalanceRecord =
-                widget.dashboardViewModel.balanceViewModel.formattedBalances.elementAt(0);
-            final walletCurrency =
-                widget.lightningMode ? walletBalanceRecord.secondAsset : walletBalanceRecord.asset;
-            final walletBalance = widget.lightningMode
-                ? walletBalanceRecord.secondAvailableBalance
-                : walletBalanceRecord.availableBalance;
-            final walletFiatBalance = widget.lightningMode
-                ? walletBalanceRecord.fiatSecondAvailableBalance
-                : walletBalanceRecord.fiatAvailableBalance;
+            // The second balance should always be the lightning balance
+            final walletBalanceRecord = widget.dashboardViewModel.balanceViewModel.formattedBalances
+                .elementAt(widget.lightningMode ? 1 : 0);
+
+            final walletBalance = walletBalanceRecord.availableBalance;
+            final walletFiatBalance = walletBalanceRecord.fiatAvailableBalance;
 
             // the card designs is empty if widget gets built before it loads.
             // should get populated before user sees anything
@@ -163,8 +159,7 @@ class _CardsViewState extends State<CardsView> {
               accountName: accountName,
               accountBalance: accountBalance,
               designSwitchDuration: Duration(milliseconds: 150),
-              assetName: walletCurrency.title,
-              displaySat: shouldDisplaySat(),
+              assetName: walletBalanceRecord.formattedAssetTitle,
               balance: walletBalance,
               fiatBalance: walletFiatBalance,
               selected: _selectedIndex == visualIndex,
@@ -235,19 +230,6 @@ class _CardsViewState extends State<CardsView> {
         ),
       );
     });
-  }
-
-  bool shouldDisplaySat() {
-    if (widget.dashboardViewModel.wallet.type != WalletType.bitcoin) {
-      return false;
-    }
-
-    if (!widget.lightningMode) {
-      return false;
-    }
-
-    return widget.dashboardViewModel.settingsStore.displayAmountsInSatoshi !=
-        BitcoinAmountDisplayMode.bitcoin;
   }
 
   Future<void> depositToL2() async {
