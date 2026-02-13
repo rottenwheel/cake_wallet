@@ -145,13 +145,15 @@ class _CardsViewState extends State<CardsView> {
                       onTap: withdrawFromL2,
                     )
                   ]
-                : [
-                    BalanceCardAction(
-                      label: S.current.buy,
-                      icon: Icons.arrow_forward,
-                      onTap: () => Navigator.of(context).pushNamed(Routes.buySellPage),
-                    )
-                  ];
+                : widget.dashboardViewModel.isEnabledTradeAction
+                    ? [
+                        BalanceCardAction(
+                          label: S.current.buy,
+                          icon: Icons.arrow_forward,
+                          onTap: () => Navigator.of(context).pushNamed(Routes.buySellPage),
+                        )
+                      ]
+                    : [];
 
             return BalanceCard(
               width: cardWidth,
