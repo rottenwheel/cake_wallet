@@ -203,11 +203,21 @@ class _CardsViewState extends State<CardsView> {
         _selectedIndex = 0;
       }
 
-      final order = widget.dashboardViewModel.cardOrder.length != numCards
+      Map<int, int> order = widget.dashboardViewModel.cardOrder.length != numCards
           ? Map<int, int>.fromEntries(
               List.generate(numCards, (i) => MapEntry(i, i)),
             )
           : widget.dashboardViewModel.cardOrder;
+
+      for (int i = min(numCards - 1, maxCards); i >= 0; i--) {
+        int visualIndex = (_selectedIndex - i + numCards) % numCards;
+        if (order[visualIndex] == null) {
+          order = Map<int, int>.fromEntries(
+            List.generate(numCards, (i) => MapEntry(i, i)),
+          );
+        }
+      }
+
 
       final bool compactMode = numCards >= compactModeTreshold;
       final double overlapAmount = compactMode ? 5.0 : 60.0;
