@@ -56,65 +56,64 @@ class DisplaySettingsPage extends StatelessWidget {
                         _displaySettingsViewModel.setShowAddressBookPopup(value);
                       },
                     ),
-                    SettingsSwitcherCell(
-                      title: S.of(context).show_zcash_card,
-                      value: _displaySettingsViewModel.showZcashCard,
-                      onValueChange: (_, bool value) {
-                        _displaySettingsViewModel.setShowZcashCard(value);
-                      },
-                    ),
-                    SettingsPickerCell<SyncStatusDisplayMode>(
-                      title: S.current.sync_status_display_mode,
-                      items: SyncStatusDisplayMode.values.toList(),
-                      selectedItem: _displaySettingsViewModel.syncStatusDisplayMode,
-                      onItemSelected: (SyncStatusDisplayMode mode) =>
-                          _displaySettingsViewModel.setSyncStatusDisplayMode(mode),
-                      displayItem: (SyncStatusDisplayMode mode) => mode.title,
-                      isGridView: false,
-                    ),
-                    if (_displaySettingsViewModel.showDisplayAmountsInSatoshiSetting)
-                      SettingsChoicesCell(ChoicesListItem<BitcoinAmountDisplayMode>(
-                        title: S.of(context).bitcoin_amount_display,
-                        items: BitcoinAmountDisplayMode.all,
-                        selectedItem: _displaySettingsViewModel.displayAmountsInSatoshi,
-                        onItemSelected: _displaySettingsViewModel.setDisplayAmountsInSatoshi,
-                        displayItem: (mode) => mode.title,
-                      ),),
-                    //if (!isHaven) it does not work correctly
-                    if (!_displaySettingsViewModel.disabledFiatApiMode)
-                      SettingsPickerCell<FiatCurrency>(
-                        title: S.of(context).settings_currency,
-                        searchHintText: S.of(context).search_currency,
-                        items: FiatCurrency.all,
-                        selectedItem: _displaySettingsViewModel.fiatCurrency,
-                        onItemSelected: (FiatCurrency currency) =>
-                            _displaySettingsViewModel.setFiatCurrency(currency),
-                        images: FiatCurrency.all
-                            .map((e) => Image.asset("assets/images/flags/${e.countryCode}.png"))
-                            .toList(),
-                        isGridView: true,
-                        matchingCriteria: (FiatCurrency currency, String searchText) {
-                          return currency.title.toLowerCase().contains(searchText) ||
-                              currency.fullName.toLowerCase().contains(searchText);
-                        },
-                      ),
-                    SettingsPickerCell<String>(
-                      title: S.of(context).settings_change_language,
-                      searchHintText: S.of(context).search_language,
-                      items: LanguageService.list.keys.toList(),
-                      displayItem: (dynamic code) {
-                        return LanguageService.list[code] ?? '';
-                      },
-                      selectedItem: _displaySettingsViewModel.languageCode,
-                      onItemSelected: _displaySettingsViewModel.onLanguageSelected,
-                      images: LanguageService.list.keys
-                          .map((e) => Image.asset(
-                              "assets/images/flags/${LanguageService.localeCountryCode[e]}.png"))
-                          .toList(),
-                      matchingCriteria: (String code, String searchText) {
-                        return LanguageService.list[code]?.toLowerCase().contains(searchText) ?? false;
-                      },
-                    ),
+                    if (_displaySettingsViewModel.showZcashCardSetting)
+                SettingsSwitcherCell(
+                  title: S.of(context).show_zcash_card,
+                  value: _displaySettingsViewModel.showZcashCard,
+                  onValueChange: (_, value) => _displaySettingsViewModel.setShowZcashCard(value),
+                ),
+              SettingsPickerCell<SyncStatusDisplayMode>(
+                title: S.current.sync_status_display_mode,
+                items: SyncStatusDisplayMode.values.toList(),
+                selectedItem: _displaySettingsViewModel.syncStatusDisplayMode,
+                onItemSelected: (SyncStatusDisplayMode mode) =>
+                    _displaySettingsViewModel.setSyncStatusDisplayMode(mode),
+                displayItem: (SyncStatusDisplayMode mode) => mode.title,
+                isGridView: false,
+              ),
+              if (_displaySettingsViewModel.showDisplayAmountsInSatoshiSetting)
+                SettingsChoicesCell(ChoicesListItem<BitcoinAmountDisplayMode>(
+                  title: S.of(context).bitcoin_amount_display,
+                  items: BitcoinAmountDisplayMode.all,
+                  selectedItem: _displaySettingsViewModel.displayAmountsInSatoshi,
+                  onItemSelected: _displaySettingsViewModel.setDisplayAmountsInSatoshi,
+                  displayItem: (mode) => mode.title,
+                ),),
+              //if (!isHaven) it does not work correctly
+              if (!_displaySettingsViewModel.disabledFiatApiMode)
+                SettingsPickerCell<FiatCurrency>(
+                  title: S.of(context).settings_currency,
+                  searchHintText: S.of(context).search_currency,
+                  items: FiatCurrency.all,
+                  selectedItem: _displaySettingsViewModel.fiatCurrency,
+                  onItemSelected: (FiatCurrency currency) =>
+                      _displaySettingsViewModel.setFiatCurrency(currency),
+                  images: FiatCurrency.all
+                      .map((e) => Image.asset("assets/images/flags/${e.countryCode}.png"))
+                      .toList(),
+                  isGridView: true,
+                  matchingCriteria: (FiatCurrency currency, String searchText) {
+                    return currency.title.toLowerCase().contains(searchText) ||
+                        currency.fullName.toLowerCase().contains(searchText);
+                  },
+                ),
+              SettingsPickerCell<String>(
+                title: S.of(context).settings_change_language,
+                searchHintText: S.of(context).search_language,
+                items: LanguageService.list.keys.toList(),
+                displayItem: (dynamic code) {
+                  return LanguageService.list[code] ?? '';
+                },
+                selectedItem: _displaySettingsViewModel.languageCode,
+                onItemSelected: _displaySettingsViewModel.onLanguageSelected,
+                images: LanguageService.list.keys
+                    .map((e) => Image.asset(
+                        "assets/images/flags/${LanguageService.localeCountryCode[e]}.png"))
+                    .toList(),
+                matchingCriteria: (String code, String searchText) {
+                  return LanguageService.list[code]?.toLowerCase().contains(searchText) ?? false;
+                },
+              ),
 
                     if (FeatureFlag.customBackgroundEnabled)
                       StandardListRow(

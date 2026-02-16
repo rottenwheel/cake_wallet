@@ -586,8 +586,12 @@ abstract class DashboardViewModelBase with Store {
   BalanceDisplayMode get balanceDisplayMode => appStore.settingsStore.balanceDisplayMode;
 
   @computed
+  @Deprecated("Replaced by showApps")
   bool get shouldShowMarketPlaceInDashboard =>
       appStore.settingsStore.shouldShowMarketPlaceInDashboard;
+
+  @computed
+  bool get showApps => appStore.settingsStore.shouldShowMarketPlaceInDashboard;
 
   @computed
   List<TradeListItem> get trades =>

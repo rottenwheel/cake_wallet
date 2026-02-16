@@ -119,9 +119,14 @@ class _NewHomePageState extends State<NewHomePage> {
                     UnconfirmedBalanceWidget(dashboardViewModel: widget.dashboardViewModel,),
                   ],
                 ),
-                CoinActionRow(lightningMode: _lightningMode),
                 Observer(
-                  builder: (_)=>AssetsHistorySection(
+                  builder: (_) => CoinActionRow(
+                    lightningMode: _lightningMode,
+                    showSwap: widget.dashboardViewModel.isEnabledSwapAction,
+                  ),
+                ),
+                Observer(
+                  builder: (_) => AssetsHistorySection(
                     nftViewModel: widget.nftViewModel,
                     dashboardViewModel: widget.dashboardViewModel,
                   ),
