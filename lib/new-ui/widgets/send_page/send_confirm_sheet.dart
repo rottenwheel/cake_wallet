@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cake_wallet/core/address_validator.dart';
 import 'package:cake_wallet/core/utilities.dart';
 import 'package:cake_wallet/generated/i18n.dart';
 import 'package:cake_wallet/new-ui/widgets/animated_dropdown.dart';
@@ -9,6 +10,7 @@ import 'package:cake_wallet/utils/address_formatter.dart';
 import 'package:cake_wallet/view_model/send/send_view_model.dart';
 import 'package:cake_wallet/view_model/send/send_view_model_state.dart';
 import 'package:cake_wallet/bitcoin/bitcoin.dart';
+import 'package:cw_core/crypto_amount_format.dart';
 import 'package:cw_core/crypto_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -155,20 +157,23 @@ class SendTransactionDetails extends StatelessWidget {
   Widget _buildMainContent(BuildContext context) {
     final transaction = sendViewModel.pendingTransaction;
 
-    final amount = (transaction == null)
-        ? sumStr(
-            sendViewModel.outputs.where((e)=>!e.sendAll).toList(),
-            (o) => double.parse(o.roundedCryptoAmount(8)),
-          )
-        : formatAmount(transaction.amountFormatted);
+    final amount = sendViewModel.amountParsingProxy.getDisplayCryptoAmount(
+        (transaction == null)
+            ? sumStr(
+                sendViewModel.outputs.where((e) => !e.sendAll).toList(),
+                (o) => double.parse(o.roundedCryptoAmount(8)),
+              )
+            : formatAmount(transaction.amountFormatted),
+        sendViewModel.selectedCryptoCurrency);
 
-    final fee = (transaction == null)
-        ? sumWithUnit(
-            sendViewModel.outputs,
-            (o) => double.parse(o.estimatedFee.replaceAll(",", "")),
-            sendViewModel.currency.title,
-          )
-        : transaction.feeFormatted;
+    final fee = "${sendViewModel.amountParsingProxy.getDisplayCryptoAmount(
+        (transaction == null)
+            ? sumStr(
+                sendViewModel.outputs,
+                (o) => double.parse(o.estimatedFee.replaceAll(",", "")),
+              )
+            : transaction.feeFormattedValue,
+        sendViewModel.currency)} ${sendViewModel.currencySymbol}";
 
     final fiatAmount = (transaction == null)
         ? sumWithUnit(
@@ -185,6 +190,9 @@ class SendTransactionDetails extends StatelessWidget {
             sendViewModel.fiatCurrency.title,
           )
         : sendViewModel.pendingTransactionFeeFiatAmountFormatted;
+
+    final showAddress = !sendViewModel.outputs.any(
+        (e) => RegExp(AddressValidator.bolt11InvoiceMatcher).hasMatch(e.address.toLowerCase()));
 
     final outputs = sendViewModel.outputs;
 
@@ -210,7 +218,7 @@ class SendTransactionDetails extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           color: Theme.of(context).colorScheme.onSurface),
                     ),
-                    Text(sendViewModel.currency.title,
+                    Text(sendViewModel.currencySymbol,
                         style: TextStyle(
                             fontSize: 36,
                             fontWeight: FontWeight.w400,
@@ -226,7 +234,7 @@ class SendTransactionDetails extends StatelessWidget {
                 ),
               ],
             ),
-            if (outputs.length >= 1 && (outputs.first.extractedAddress.isNotEmpty || outputs.first.address.isNotEmpty))
+            if (outputs.length >= 1 && (outputs.first.extractedAddress.isNotEmpty || outputs.first.address.isNotEmpty) && showAddress)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 12,
@@ -358,7 +366,7 @@ class SendTransactionDetails extends StatelessWidget {
 
   String formatAmount(String amount) {
     try {
-      return double.parse(amount).toStringAsPrecision(8).replaceFirst(RegExp(r"\.?0+$"), "");
+      return amount.withMaxDecimals(8);
     } catch(e) {
       return amount;
     }

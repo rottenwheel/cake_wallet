@@ -334,7 +334,7 @@ class _NewSendPageState extends State<NewSendPage> {
                                           // Process the payment through the new flow
                                           await _handlePaymentFlow(
                                             uri.toString(),
-                                            PaymentRequest.fromUri(uri),
+                                            PaymentRequest.fromString(uri.toString()),
                                           );
                                         },
                                         onEditingComplete: (){
@@ -394,31 +394,33 @@ class _NewSendPageState extends State<NewSendPage> {
                                       ),
                                     ],
                                   ),
-                                  AnimatedDropdown(
+                                  if (widget.sendViewModel.hasCoinControl ||
+                                      widget.sendViewModel.hasFees)
+                                    AnimatedDropdown(
                                       dropdownText: S.of(context).advanced_settings,
                                       content: Column(children: [
                                         if (widget.sendViewModel.hasFees)
-                                                ListItemRegularRowWidget(
-                                                  keyValue: "",
-                                                  label: S.of(context).fees,
-                                                  subtitle: "~${output.estimatedFee} ${widget.sendViewModel.currency} (${output.estimatedFeeFiatAmount} ${widget.sendViewModel.fiatCurrency})",
-                              
-                                      onTap: () {
-                                        if (widget.sendViewModel.feesViewModel.hasFeesPriority)
-                                          pickTransactionPriority(context, output);
-                                      },
-                                    ),
-                                    if(widget.sendViewModel.hasCoinControl)
-                                    ListItemRegularRowWidget(
-                                      keyValue: "",
-                                      label: "Coin Control",
-                                      onTap: () {
-                                        Navigator.of(context).pushNamed(Routes.unspentCoinsList);
-                                      },
+                                          ListItemRegularRowWidget(
+                                            keyValue: "",
+                                            label: S.of(context).fees,
+                                            subtitle:
+                                                "~${output.estimatedFee} ${widget.sendViewModel.currency} (${output.estimatedFeeFiatAmount} ${widget.sendViewModel.fiatCurrency})",
+                                            onTap: () {
+                                              if (widget
+                                                  .sendViewModel.feesViewModel.hasFeesPriority)
+                                                pickTransactionPriority(context, output);
+                                            },
+                                          ),
+                                        if (widget.sendViewModel.hasCoinControl)
+                                          ListItemRegularRowWidget(
+                                            keyValue: "",
+                                            label: "Coin Control",
+                                            onTap: () => Navigator.of(context)
+                                                .pushNamed(Routes.unspentCoinsList),
+                                          )
+                                      ]),
                                     )
-                                ]))
-                              
-                                  ],
+                                ],
                                 ),
                               ),
                             ),
@@ -1039,7 +1041,9 @@ class _NewSendPageState extends State<NewSendPage> {
     }
     _addressControllers[_selectedOutput].text = paymentRequest.address;
     if (paymentRequest.amount.isNotEmpty) {
-      _amountControllers[_selectedOutput].text = paymentRequest.amount;
+      _amountControllers[_selectedOutput].text = widget.sendViewModel.amountParsingProxy
+          .getDisplayCryptoAmount(
+              paymentRequest.amount, widget.sendViewModel.selectedCryptoCurrency);
     }
     // TODO: add notes
     // noteController.text = paymentRequest.note;
