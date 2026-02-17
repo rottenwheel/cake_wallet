@@ -1146,7 +1146,7 @@ class SwapAmountBoxState extends State<SwapAmountBox> {
         ? widget.exchangeViewModel.receiveAmountFiat
         : widget.exchangeViewModel.depositAmountFiat;
 
-    if (double.parse(fiatAmountController.text) != double.parse(newText)) {
+    if (double.tryParse(fiatAmountController.text) != double.tryParse(newText)) {
       if (newText == "0.00") {
         fiatAmountController.text = "";
       } else {
