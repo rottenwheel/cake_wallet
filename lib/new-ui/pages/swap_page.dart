@@ -840,7 +840,7 @@ class SwapAmountBoxState extends State<SwapAmountBox> {
                     Expanded(
                         child: TextFormField(
                           keyboardType: TextInputType.numberWithOptions(signed:false,decimal:true),
-                      validator: widget.currencyValueValidator,
+                      validator: _fiatInputMode ? null : widget.currencyValueValidator,
                       controller: _fiatInputMode ? fiatAmountController : amountController,
                       style: TextStyle(
                           fontSize: 28,
@@ -1065,6 +1065,13 @@ class SwapAmountBoxState extends State<SwapAmountBox> {
     final currencies = widget.isReceiverCard
         ? widget.exchangeViewModel.receiveCurrencies
         : widget.exchangeViewModel.depositCurrencies;
+    if(widget.exchangeViewModel.wallet.type == WalletType.bitcoin) {
+      currencies.sort((a, b) {
+        if(a == CryptoCurrency.btcln) return -1;
+        if(b == CryptoCurrency.btcln) return 1;
+        return 0;
+      });
+    }
 
     showPopUp<void>(
       context: context,
@@ -1168,7 +1175,7 @@ class SwapAmountBoxState extends State<SwapAmountBox> {
       if (newText == "0.00") {
         fiatAmountController.text = "";
       } else {
-        fiatAmountController.text = newText.replaceAll(RegExp(r'0+$'), '');
+        fiatAmountController.text = newText.replaceAll(RegExp(r'0+$'), '').replaceAll(RegExp(r'\.$'), '');
       }
     }
   }
