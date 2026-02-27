@@ -709,7 +709,8 @@ Route<dynamic> createRoute(RouteSettings settings) {
       return CupertinoPageRoute<void>(builder: (_) => getIt.get<ExchangeTemplatePage>());
 
     case Routes.rescan:
-      return MaterialPageRoute<void>(builder: (_) => getIt.get<RescanPage>());
+      final page = getIt.get<RescanPage>();
+      return MaterialPageRoute<void>(builder: (_) => page);
 
     case Routes.faq:
       return MaterialPageRoute<void>(builder: (_) => getIt.get<FaqPage>());
