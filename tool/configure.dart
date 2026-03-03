@@ -1480,6 +1480,12 @@ abstract class EVM {
     BigInt requiredAmount,
   );
   
+  Future<BigInt?> getAllowance(
+      WalletBase wallet,
+      String tokenContract,
+      String spender) =>
+      (wallet as EVMChainWallet).getAllowance(tokenContract, spender);
+  
   Future<PendingTransaction> createTokenApproval(
     WalletBase wallet,
     BigInt amount,
@@ -1495,7 +1501,9 @@ abstract class EVM {
     String dataHex,
     BigInt valueWei,
     TransactionPriority? priority,
-    {bool useBlinkProtection = true}
+    {bool useBlinkProtection = true,
+    String? sourceTokenAddress,
+    BigInt? sourceTokenAmount}
   );
   
   // Hardware wallet methods
