@@ -811,14 +811,11 @@ abstract class SendViewModelBase extends WalletChangeListenerViewModel with Stor
 
       if (trade?.isSendAll == true) {
         if (provider is NearIntentsExchangeProvider) {
-          final txAmount = pendingTransaction?.amountFormatted ?? '0';
-          final txAmountBigInt = BigInt.tryParse(
-              txAmount.replaceAll('.', '')) ?? BigInt.zero;
-          final tradeAmountBigInt = BigInt.tryParse(
-              trade?.amount.replaceAll('.', '') ?? '') ?? BigInt.zero;
-          if (txAmountBigInt != tradeAmountBigInt) {
+          final txAmountDouble = double.tryParse(pendingTransaction?.amountFormatted ?? '0') ?? 0.0;
+          final tradeAmountDouble = double.tryParse(trade?.amount ?? '0') ?? 0.0;
+          if (txAmountDouble != tradeAmountDouble) {
             throw Exception(
-                'Transaction amount $txAmountBigInt does not match expected trade amount $tradeAmountBigInt');
+                'Transaction amount $txAmountDouble does not match expected trade amount $tradeAmountDouble');
           }
         }
       }
